@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        :root {
+            --bg-pink: #ffccd5;
+            --main-red: #ff4d6d;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-pink);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        .hidden { display: none; }
+
+        h1 { color: var(--main-red); font-size: 1.5rem; }
+        
+        .btn-group { margin-top: 20px; }
+
+        button {
+            background: var(--main-red);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+            margin: 5px;
+        }
+
+        button:hover { transform: scale(1.1); }
+
+        .gift-box {
+            border: 2px dashed var(--main-red);
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        /* Simple floating animation for hearts */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .heart {
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="container">
+        <div class="heart">💖</div>
+        <h1>Hey there, <br> Will you be my Valentine?</h1>
+        <div class="btn-group">
+            <button onclick="nextPage('page2')">YES OF COURSE</button>
+            <button id="no-btn" onmouseover="moveButton()">NO THANK YOU</button>
+        </div>
+    </div>
+
+    <div id="page2" class="container hidden">
+        <div class="heart">✨</div>
+        <h1>Yay, you said yes!</h1>
+        <p>I made all these for you hehe</p>
+        <div class="gift-group">
+            <div class="gift-box" onclick="nextPage('gift1')">Gift 1 🌹</div>
+            <div class="gift-box" onclick="nextPage('gift2')">Gift 2 📝</div>
+            <div class="gift-box" onclick="nextPage('gift3')">Gift 3 🎵</div>
+        </div>
+    </div>
+
+    <div id="gift1" class="container hidden">
+        <h1>A Virtual Bouquet</h1>
+        <p>💐🌹🌷🌻</p>
+        <p>"You are the best part of my life"</p>
+        <button onclick="nextPage('page2')">Go Back</button>
+    </div>
+
+    <div id="gift2" class="container hidden">
+        <h1>Words from my Heart</h1>
+        <p style="font-style: italic;">"To the love of my life, you make every day brighter..."</p>
+        <button onclick="nextPage('page2')">Go Back</button>
+    </div>
+
+    <div id="gift3" class="container hidden">
+        <h1>A Song for You</h1>
+        <div style="background: #eee; height: 150px; width: 150px; margin: auto; display: flex; align-items: center; justify-content: center; border: 1px solid #ccc;">
+            [Insert QR Code]
+        </div>
+        <p>Scan to hear our song!</p>
+        <button onclick="nextPage('page1')">Restart</button>
+    </div>
+
+    <script>
+        function nextPage(pageId) {
+            // Hide all containers
+            document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
+            // Show the target container
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+
+        function moveButton() {
+            const btn = document.getElementById('no-btn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+    </script>
+</body>
+</html>
